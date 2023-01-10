@@ -80,10 +80,10 @@
       <ng-container *ngFor="let period of periods; index as periodIndex;">
       <tr>
         <td>{{periodIndex + 1}}</td>
-        <td *ngFor="let day of periodWithDays; index as i" [ngClass]="{ 'todayList':  i == todayDay }">
+        <td  *ngFor="let day of periodWithDays; index as i" [ngClass]="{ 'todayList':  i == todayDay }">
           <div *ngIf="day?.period else elseBlock">
           <div class="subjectName">
-            {{ day?.period[periodIndex]?.subject ? day?.period[periodIndex]?.subject : '--'}}
+            {{ day?.period[periodIndex]?.subject}}
             </div>
           <ng-container *ngIf="day?.period[periodIndex]?.books" >
             <div class="bookList" *ngFor="let book of day?.period[periodIndex]?.books" >
