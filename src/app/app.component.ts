@@ -46,7 +46,7 @@ export class AppComponent {
   ngOnInit() {
     this.todayDay = new Date();
     this.todayDay = this.todayDay.getDay() - 1;
-    this.periods = [1, 2, 3,/* 4,5,6 */];
+    this.periods = [1, 2, 3, 4, 5,6];
 
     this.days = [
       "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
