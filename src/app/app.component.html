@@ -73,19 +73,21 @@
     <thead>
       <tr>
         <th>Period</th>
-        <th *ngFor="let day of days; index as dayIndex" [ngClass]="{ 'todayList':  dayIndex == todayDay }">{{day}}</th>   
+        <th *ngFor="let day of periodWithDays; index as dayIndex" [ngClass]="{ 'todayList':  dayIndex == todayDay }">{{day.day}}</th>   
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let period of periods; index as periodIndex;">
         <td>{{periodIndex + 1}}</td>
-        <td *ngFor="let day of days; index as i" [ngClass]="{ 'todayList':  i == todayDay }">
+        <td *ngFor="let day of periodWithDays; index as i" [ngClass]="{ 'todayList':  i == todayDay }">
+          <div *ngIf="day?.period">
           <div class="subjectName">
-            {{ allDays[i].period[periodIndex].subject }} 
+            {{ day?.period[periodIndex]?.subject }}
             </div>
-          <div *ngFor="let book of allDays[i].period[periodIndex].books" class="bookList" >
+          <div *ngFor="let book of day?.period[periodIndex].books" class="bookList" >
            {{ book }}
           </div>
+        </div>
         </td>
       </tr>
     </tbody>
