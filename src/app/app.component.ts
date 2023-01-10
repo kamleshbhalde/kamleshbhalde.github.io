@@ -46,7 +46,7 @@ export class AppComponent {
   ngOnInit() {
     this.todayDay = new Date();
     this.todayDay = this.todayDay.getDay() - 1;
-    this.periods = [1, 2, 3, 4, 5,6];
+    this.periods = [1, 2, 3, 4, 5,6]; // unwanted array will check
 
     this.days = [
       "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
@@ -56,9 +56,18 @@ export class AppComponent {
       [
         {
           "day": 1,
-          "period": [
+          "periods": [
             {
+              "day":1,
               "period": 2,
+              "subject": "marathi",
+              "books": [
+                8
+              ]
+            },
+            {
+              "day":1,
+              "period": 3,
               "subject": "hindi",
               "books": [
                 5
@@ -71,14 +80,7 @@ export class AppComponent {
                 1, 2
               ]
             }
-            ,
-            {
-              "period": 3,
-              "subject": "marathi",
-              "books": [
-                8
-              ]
-            }
+           
           ]
         }
       ];
@@ -200,7 +202,7 @@ export class AppComponent {
 
 
     this.allDays.forEach((element: any) => {
-      element.period.forEach((item: any) => {
+      element.periods.forEach((item: any) => {
         const booksReset = item.books.map((bookID: any) => {
           const bookDetails = this.books.find((book) => { return book.id == bookID });
           return bookDetails?.bookName;
@@ -216,7 +218,7 @@ export class AppComponent {
       });
       let replaceditem = { 'day': item }
       if (getIndex > -1) {
-        this.allDays[getIndex]["period"].sort((a: any, b: any) => { return a.period - b.period });
+        this.allDays[getIndex]["periods"].sort((a: any, b: any) => { return a.period - b.period });
 
         replaceditem = this.allDays[getIndex];
         replaceditem["day"] = item
