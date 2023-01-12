@@ -1,0 +1,132 @@
+
+
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    
+    <label for="first-name">First Name: </label>
+    <input id="first-name" name="firstName" type="text" formControlName="firstName">
+    
+<div *ngIf="profileForm.get('firstName')?.errors"
+class="alert alert-danger">
+Name is required.
+</div>
+<!--     <span *ngIf="firstName.error" style="color:red">this is required</span>
+ -->    
+ 
+ <label for="last-name">Last Name: </label>
+    <input id="last-name" type="text" formControlName="lastName">
+  
+<div formGroupName="address">
+    <h2>Address</h2>
+  
+    <label for="street">Street: </label>
+    <input id="street" type="text" formControlName="street">
+  
+    <label for="city">City: </label>
+    <input id="city" type="text" formControlName="city">
+  
+    <label for="state">State: </label>
+    <input id="state" type="text" formControlName="state">
+  
+    <label for="zip">Zip Code: </label>
+    <input id="zip" type="text" formControlName="zip">
+</div>
+<div formArrayName="aliases">
+    <h2>Aliases</h2>
+    <button type="button" (click)="addAlias()">+ Add another alias</button>
+  
+    <div *ngFor="let alias of aliases.controls; let i=index">
+      <!-- The repeated alias template -->
+      <label for="alias-{{ i }}">Alias:</label>
+      <input id="alias-{{ i }}" type="text" [formControlName]="i">
+    </div>
+  </div>
+  
+<p>Complete the form to enable button.</p>
+
+<p>{{ profileForm.value | json }}</p>
+<p>Form Status: {{ profileForm.status }}</p>
+<button type="submit" [disabled]="!profileForm.valid">Submit</button>
+
+  </form>
+<div class="mt-2">
+<!--   <button type="button" class="btn btn-outline-primary me-2" (click)="updateValueWithPatch()">updateValue with patch</button>
+ --></div>
+
+
+<!-- <form class="row g-3  mb-3 mt-3" [formGroup]="setPeriod" (ngSubmit)="onSubmit()">
+        <div class="col-md-6 offset-6 row ps-0 pe-0">
+        <div class="col-md-6">
+            <label class="form-label">
+                Select Day
+            </label>
+            <select class="form-select" formControlName="day">
+                <option selected>Select Day</option>
+                <option [ngValue]="day" *ngFor="let day of days">{{day}}</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">
+                Select Period
+            </label>
+            <select class="form-select" formControlName="period">
+                <option selected>Select Period</option>
+                <option [ngValue]="period" *ngFor="let period of periods">{{ period}}</option>
+               
+            </select>
+        </div>
+
+    </div>
+        <div class="col-md-6 offset-6">
+        <div class="mb-3">
+            <label class="form-label">
+                Select Subject
+            </label>
+            <select class="form-select" formControlName="subject">
+                <option selected>Select Subject</option>
+                <option [ngValue]="subject" *ngFor="let subject of subjects">{{subject}}</option>
+            </select>
+        </div>
+        
+        <div class="mb-3" formGroupName="books">
+            <label class="form-label">
+                Select book
+            </label>
+            <div class="input-group mb-3">
+                
+                <select class="form-select" formControlName="bookName">
+                    <option selected>Select books</option>
+                    <option [ngValue]="book.id" *ngFor="let book of books">{{book.bookName}}</option>
+                </select>
+                <button class="btn btn-outline-primary"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-plus" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z"/>
+                    <path d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z"/>
+                  </svg> Add Book</button>
+            </div>
+              
+              
+          
+        </div>
+    </div>
+    <div class="col-md-12 text-end">
+        <button type="submit" class="btn btn-outline-primary">Add</button>
+    </div>
+</form>
+
+<table class="table">
+    <tr *ngFor="let data of storeDataArray;">
+        <td>
+            {{data.day}}
+            </td>
+            <td>
+                {{data.period}}
+                </td>
+                <td>
+                    {{data.subject}}
+                    </td>
+                    <td>
+                        <div *ngFor="let book of data.books">
+                        {{ book.bookName }}
+                        </div>
+                        </td>
+    </tr>
+    </table> -->

@@ -1,0 +1,33 @@
+    <!-- <div class="col">
+        <app-addperiod></app-addperiod>
+    </div> -->
+    
+    
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Period</th>
+          <th *ngFor="let day of periodWithDays; index as dayIndex" [ngClass]="{ 'todayList':  dayIndex == todayDay }">{{day.day}}</th>   
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let period of periods; index as periodIndex;">
+        <tr>
+          <td>{{periodIndex + 1}}</td>
+          <td  *ngFor="let day of periodWithDays; index as i" [ngClass]="{ 'todayList':  i == todayDay }">
+            <div *ngIf="day?.periods else elseBlock">
+            <div class="subjectName">
+              {{ day?.periods[periodIndex]?.subject ? day?.periods[periodIndex]?.subject : '--'}}
+              </div>
+            <ng-container *ngIf="day?.periods[periodIndex]?.books" >
+              <div class="bookList" *ngFor="let book of day?.periods[periodIndex]?.books" >
+                 {{ book }}
+             </div>
+            </ng-container>
+          </div>
+          </td>
+        </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  <ng-template #elseBlock>--</ng-template>
