@@ -1,30 +1,31 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
+class selectOption{
+  constructor(public id:number, public name:string) {
+  }
+};
+class bookOption{ 
+  constructor(public id:number, public name:string, public subject:string){}
+};
+
 @Component({
   selector: 'app-addperiod',
   templateUrl: './addperiod.component.html',
   styleUrls: ['./addperiod.component.scss']
 })
+
+
 export class AddperiodComponent {
   setPeriod:any;
-  profileForm:FormGroup;
-  days:any;
+/*   profileForm:FormGroup;
+ */  days:any;
   subjects:any;
-  books:any;
-  periods:any;
-  storeDataArray:any;
+  booksList:any;
+  periods:any;/* 
+  storeDataArray:any; */
   constructor(public fb:FormBuilder){
-    this.profileForm= /* new FormGroup({
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
-      address: new FormGroup({
-        street: new FormControl(''),
-        city: new FormControl(''),
-        state: new FormControl(''),
-        zip: new FormControl('')
-      })
-    }) */
+   /*  this.profileForm=
     this.fb.group({
       firstName:['', Validators.required ],
       lastName:['', Validators.required],
@@ -39,136 +40,146 @@ export class AddperiodComponent {
       ])
     
     })
-    ;
+    ; */
   }
   ngOnInit(){
    this.setPeriod = this.fb.group({
       day: [''],
     period:[''],
     subject:[''],
-    books:this.fb.group({
-      bookName:['']
-    })
+    books: this.fb.array([
+      this.fb.control('', Validators.required)
+    ])
     });
 
-    this.periods = [1,2,3,4,5,6];
+    this.periods = [
+      new selectOption(1, "1"),
+      new selectOption(2, "2"),
+      new selectOption(3, "3"),
+      new selectOption(4, "4"),
+      new selectOption(5, "5"),
+      new selectOption(6, "6")
+    ];
     this.days = [
-      "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+      new selectOption(1, "monday"),
+      new selectOption(2, "tuesday"),
+      new selectOption(3, "wednesday"),
+      new selectOption(4, "thursday"),
+      new selectOption(5, "friday"),
+      new selectOption(6, "saturday")
     ];
     this.subjects = [
-      "English", // when , where , which books
-      "Hindi",
-      "Marathi",
-      "Maths",
-      "Science",
-      "S.St.",
-      "Computer",
-      "G.K.",
-      "V.E.",
-      "Art",
-      "AI",
-      "P.T.",
-      "Music",
-      "Library",
-      "Test"
+      new selectOption(1, "English"),
+      new selectOption(2, "Hindi"),
+      new selectOption(3, "Marathi"),
+      new selectOption(4, "Maths"),
+      new selectOption(5, "Science"),
+      new selectOption(6,  "S.St.",),
+      new selectOption(7, "Computer"),
+      new selectOption(8, "G.K."),
+      new selectOption(9, "V.E."),
+      new selectOption(10, "Art"),
+      new selectOption(11, "AI"),
+      new selectOption(12, "P.T."),
+      new selectOption(13, "Music"),
+      new selectOption(14, "Library"),
+      new selectOption(15, "Test")
     ];
-    this.books =
+    this.booksList =
       [
-        {
-          "id": 1,
-          "bookName": "Treasures of English Textbook",
-          "subject": "english"
-        },
-        {
-          "id": 2,
-          "bookName": "Advanced English Grammer Textbook",
-          "subject": "english"
-        },
-        {
-          "id": 3,
-          "bookName": "Tenali Raman Book",
-          "subject": "english"
-        },
-        {
-          "id": 4,
-          "bookName": "Cursive Writing book",
-          "subject": "english"
-        },
-  
-        {
-          "id": 5,
-          "bookName": "Prathibha Textbook",
-          "subject": "hindi"
-        },
-        {
-          "id": 6,
-          "bookName": "Vyakaran Textbook",
-          "subject": "hindi"
-        },
-        {
-          "id": 7,
-          "bookName": "Sulekh Book",
-          "subject": "hindi"
-        },
-        {
-          "id": 8,
-          "bookName": "Marathi Sulabh Bharati Textbook",
-          "subject": "marathi"
-        },
-        {
-          "id": 9,
-          "bookName": "Lekhan Pan Book",
-          "subject": "marathi"
-        },
-        {
-          "id": 10,
-          "bookName": "Step By Step Mathematics",
-          "subject": "maths"
-        },
-        {
-          "id": 11,
-          "bookName": "Mastering Science",
-          "subject": "Science"
-        },
-        {
-          "id": 12,
-          "bookName": "My Wonderful Book of Social Studies Textbook",
-          "subject": "SocialStudies"
-        },
-        {
-          "id": 13,
-          "bookName": "Integrated Complluter Textbook",
-          "subject": "Computer"
-        },
-        {
-          "id": 14,
-          "bookName": "Brain Booster Plus",
-          "subject": "G.K."
-        },
-        {
-          "id": 15,
-          "bookName": "inspiring Souls Textbook",
-          "subject": "v.E."
-        },
-  
-        {
-          "id": 16,
-          "bookName": "Prachi Visual Art Book",
-          "subject": "Art"
-        },
-        {
-          "id": 17,
-          "bookName": "plain Drawing Book",
-          "subject": "Art"
-        },
-        {
-          "id": 18,
-          "bookName": "AI Lab textbook",
-          "subject": "AI"
-        }
+       new bookOption (
+          1,
+          "Treasures of English Textbook",
+          "english"
+          ),
+          new bookOption (
+           2,
+         "Advanced English Grammer Textbook",
+           "english"
+       ),
+       new bookOption (
+           3,
+         "Tenali Raman Book",
+           "english"
+       ),
+       new bookOption (
+           4,
+         "Cursive Writing book",
+           "english"
+       ),
+       new bookOption (
+           5,
+         "Prathibha Textbook",
+           "hindi"
+       ),
+       new bookOption (
+           6,
+         "Vyakaran Textbook",
+           "hindi"
+       ),
+       new bookOption (
+           7,
+         "Sulekh Book",
+           "hindi"
+       ),
+       new bookOption (
+           8,
+         "Marathi Sulabh Bharati Textbook",
+           "marathi"
+       ),
+       new bookOption (
+           9,
+         "Lekhan Pan Book",
+           "marathi"
+       ),
+       new bookOption (
+           10,
+         "Step By Step Mathematics",
+           "maths"
+       ),
+       new bookOption (
+           11,
+         "Mastering Science",
+           "Science"
+       ),
+       new bookOption    (
+           12,
+         "My Wonderful Book of Social Studies Textbook",
+           "SocialStudies"
+       ),
+       new bookOption (
+           13,
+         "Integrated Complluter Textbook",
+           "Computer"
+       ),
+       new bookOption  (
+           14,
+         "Brain Booster Plus",
+           "G.K."
+       ),
+       new bookOption  (
+           15,
+         "inspiring Souls Textbook",
+           "v.E."
+       ),
+       new bookOption (
+           16,
+         "Prachi Visual Art Book",
+           "Art"
+       ),
+       new bookOption (
+           17,
+         "plain Drawing Book",
+           "Art"
+       ),
+       new bookOption  (
+           18,
+         "AI Lab textbook",
+           "AI"
+        ),
   
       ];
-
+     /* 
       this.storeDataArray = [{
         "day":0,
         "period":1,
@@ -177,7 +188,10 @@ export class AddperiodComponent {
           {"bookName":"testing"}
         ]}];
 
+      */
+      }
 
+/* 
     this.profileForm.valueChanges.subscribe(x=>{
       console.log(x);
       console.log(this.profileForm.controls)
@@ -195,8 +209,6 @@ export class AddperiodComponent {
     });
   }
 
-
-
   onSubmit(){
     console.log(this.profileForm)
   }
@@ -208,11 +220,21 @@ export class AddperiodComponent {
   }
   addAlias() {
     this.aliases.push(this.fb.control('', Validators.required));
-  };
+  }; */
  /*  get registerFormControl() {
     return this.profileForm.controls;
   } */
-
+get books(){
+  return this.setPeriod.get('books') as FormArray;
+}
+addBook() {
+  this.books.push(this.fb.control('', Validators.required));
+  console.log(this.books);
+};
     
+
+  onSubmit(){
+   
+  }
 
 }
