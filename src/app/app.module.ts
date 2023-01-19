@@ -5,13 +5,15 @@ import { AppComponent } from './app.component';
 import { TimesheetComponent } from './periods/timesheet/timesheet.component';
 import { AddperiodComponent } from './periods/addperiod/addperiod.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CallbackPipe } from './callback.pipe';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     TimesheetComponent,
-    AddperiodComponent
+    AddperiodComponent,
+    CallbackPipe
   ],
   imports: [
     BrowserModule,

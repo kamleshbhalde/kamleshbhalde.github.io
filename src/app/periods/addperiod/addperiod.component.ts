@@ -44,11 +44,11 @@ export class AddperiodComponent {
   }
   ngOnInit(){
    this.setPeriod = this.fb.group({
-      day: [''],
-    period:[''],
-    subject:[''],
+      day: [null],
+    period:[null],
+    subject:[null],
     books: this.fb.array([
-      this.fb.control('', Validators.required)
+      this.fb.control(null, Validators.required)
     ])
     });
 
@@ -179,6 +179,17 @@ export class AddperiodComponent {
         ),
   
       ];
+
+      this.setPeriod.get('subject').valueChanges.subscribe((x:any)=>{
+        const control = this.books;
+        control.removeAt(0);
+        control.patchValue([null]);
+       /*  const control = <FormArray>this.setPeriod.controls['books'];
+        while (control.length > 0) {
+          control.removeAt(1)
+        } */
+         
+      });
      /* 
       this.storeDataArray = [{
         "day":0,
@@ -235,6 +246,13 @@ addBook() {
 
   onSubmit(){
    
+  }
+
+  findBooks(item:any){
+    if(this.setPeriod.get('subject') && this.setPeriod.get('subject')?.value?.name.toLowerCase() == item.subject.toLowerCase()){
+      return true
+    }
+    return false;
   }
 
 }

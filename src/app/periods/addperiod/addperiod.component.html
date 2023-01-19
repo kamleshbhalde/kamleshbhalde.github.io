@@ -97,7 +97,7 @@ Name is required.
 
                     <select class="form-select" [formControlName]="i">
                         <option selected>Select books</option>
-                        <option [ngValue]="book" *ngFor="let book of booksList ">{{book.name}}</option>
+                        <option [ngValue]="book" *ngFor="let book of booksList | callback:findBooks.bind(this)">{{book.name}}</option>
                     </select> 
                     <button class="btn btn-outline-primary" *ngIf="(i + 1) == books.controls.length" [disabled]="books.controls[i].errors" (click)="addBook()"> <svg xmlns="http://www.w3.org/2000/svg" width="16"
                         height="16" fill="currentColor" class="bi bi-patch-plus" viewBox="0 0 16 16">
