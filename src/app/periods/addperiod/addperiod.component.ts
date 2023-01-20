@@ -182,13 +182,8 @@ export class AddperiodComponent {
 
       this.setPeriod.get('subject').valueChanges.subscribe((x:any)=>{
         const control = this.books;
-        control.removeAt(0);
-        control.patchValue([null]);
-       /*  const control = <FormArray>this.setPeriod.controls['books'];
-        while (control.length > 0) {
-          control.removeAt(1)
-        } */
-         
+         control.clear();
+         control.push(this.fb.control('', Validators.required));
       });
      /* 
       this.storeDataArray = [{
